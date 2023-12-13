@@ -56,15 +56,15 @@ _______________________________________
 <p>Личные сообщения:</p> Пользователи могут обмениваться личными сообщениями, задавать вопросы и общаться один на один.
 <p>Уведомления:</p> Пользователи получают уведомления о новых сообщениях, обновлениях курсов и других важных событиях.
 <p>Профиль преподавателя:</p> Преподаватели имеют расширенные возможности для управления курсами, выставления оценок и взаимодействия с учащимися.
-<h1>Иерарфия файлов в стиле методологии FSD</h1>
+<h2>Иерарфия файлов в стиле методологии FSD</h2>
 
-<h1><a href="https://github.com/newbalancem5/flutter_info">Самый главный ресурс при разработке</a></h1>
+<h2><a href="https://github.com/newbalancem5/flutter_info">Самый главный ресурс при разработке</a></h2>
 
-<h3><a href="https://x-wei.github.io/flutter_catalog/#/">UI/UX Католог</a></h3>
+<h2><a href="https://x-wei.github.io/flutter_catalog/#/">UI/UX Католог</a></h2>
 
-<h3><a href="https://metanit.com/dart/tutorial/">Хорошоя документация читается за неделю</a></h3>
-<h3><a href="https://metanit.com/dart/flutter/">Базовые и простые примеры для Flutter</a></h3>
+<h2><a href="https://metanit.com/dart/tutorial/">Хорошоя документация читается за неделю</a></h2>
+<h2><a href="https://metanit.com/dart/flutter/">Базовые и простые примеры для Flutter</a></h2>
 
-<h1><a href="https://telegra.ph/Tehnicheskoe-zadanie-TZ-dlya-razrabotki-prilozheniya-Moodle-dlya-TTIIP-09-19" terget="_blank">Структура кода</a></h1>
+<h2><a href="https://telegra.ph/Tehnicheskoe-zadanie-TZ-dlya-razrabotki-prilozheniya-Moodle-dlya-TTIIP-09-19" terget="_blank">ТЗ</a></h2>
 
-<h1><a href="https://drive.google.com/file/d/1bB9vbCmVPvCR4TKL9TyGRM73fOFsXZl9/view?usp=sharing">UML</a></h1>
+<h2><a href="https://drive.google.com/file/d/1bB9vbCmVPvCR4TKL9TyGRM73fOFsXZl9/view?usp=sharing">UML</a></h2>
