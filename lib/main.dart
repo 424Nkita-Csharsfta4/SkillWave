@@ -1,9 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:skillwave/bloc/onbourding_bloc.dart';
-import 'package:skillwave/screens/onbourding/onboarding_screen_1.dart';
+import 'package:skillwave/course/screens/dashboard_screen.dart';
+import 'package:skillwave/screens/onbourding/onboarding_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: const FirebaseOptions(
+      apiKey: 'AIzaSyC-AcRDGJ775rr7MaOiL2IgwtSZ0vh7_jA',
+      projectId: 'auntefication-98ff3',
+      appId: '1:211196806595:android:750c99a1e160a6965ca976',
+      messagingSenderId: '',
+    ),
+  );
+
   runApp(const MyApp());
 }
 
@@ -17,7 +30,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          colorScheme: ColorScheme.fromSeed(
+              seedColor: const Color.fromARGB(255, 248, 244, 255)),
           useMaterial3: true,
           fontFamily: 'Gilroy',
           textTheme: Theme.of(context).textTheme.copyWith(
@@ -34,7 +48,7 @@ class MyApp extends StatelessWidget {
                 ),
               ),
         ),
-        home: const Onboarding(),
+        home: const DashboardScreen(),
       ),
     );
   }

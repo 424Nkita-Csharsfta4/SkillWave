@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skillwave/screens/auntification/login/login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUp extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();
@@ -7,6 +8,13 @@ class SignUp extends StatelessWidget {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
+
+  ///firebase
+  final FirebaseAuth auth = FirebaseAuth.instance;
+
+  Future<void> register(email, password) async {
+    await auth.createUserWithEmailAndPassword(email: email, password: password);
+  }
 
   SignUp({Key? key}) : super(key: key);
 
@@ -18,134 +26,121 @@ class SignUp extends StatelessWidget {
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,
-          height: double.infinity,
           color: Colors.white,
           padding: const EdgeInsets.all(20.0),
-          child: Form(
-            key: formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Column(
-                  children: [
-                    const SizedBox(
-                      width: 234,
-                      child: Text(
-                        'SkillWeave',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 36,
-                          fontFamily: 'Roboto Mono',
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    Image.asset(
-                      '../assets/image/logo_sign.png',
-                      width: 256,
-                      height: 359,
-                    ),
-                  ],
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'SkillWeave',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 36,
+                  fontFamily: 'Roboto Mono',
+                  fontWeight: FontWeight.w700,
                 ),
-                const SizedBox(height: 40),
-                TextFormField(
-                  controller: nameController,
-                  decoration: const InputDecoration(
-                    labelText: 'Имя Фамилия',
-                    border: OutlineInputBorder(),
-                  ),
+              ),
+              const SizedBox(height: 20),
+              Image.asset(
+                '../assets/image/logo_sign.png',
+                width: 256,
+                height: 359,
+              ),
+              const SizedBox(height: 20),
+              Container(
+                width: 282,
+                height: 40,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  color: Colors.white,
                 ),
-                const SizedBox(height: 20),
-                TextFormField(
+                child: TextField(
                   controller: emailController,
                   decoration: const InputDecoration(
-                    labelText: 'Почта',
-                    border: OutlineInputBorder(),
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                    hintText: 'Почта',
+                    hintStyle: TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Пожалуйста, введите почту';
-                    } else if (!value.contains('@')) {
-                      return 'Некорректный формат почты';
-                    }
-                    return null;
-                  },
                 ),
-                const SizedBox(height: 20),
-                TextFormField(
+              ),
+              const SizedBox(height: 20),
+              Container(
+                width: 282,
+                height: 40,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  color: Colors.white,
+                ),
+                child: TextField(
                   controller: passwordController,
                   obscureText: true,
                   decoration: const InputDecoration(
-                    labelText: 'Пароль',
-                    border: OutlineInputBorder(),
-                  ),
-                  maxLength: 20,
-                  textInputAction: TextInputAction.done,
-                ),
-                const SizedBox(height: 20),
-                TextFormField(
-                  controller: confirmPasswordController,
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                    labelText: 'Подтвердите пароль',
-                    border: OutlineInputBorder(),
-                  ),
-                  maxLength: 20,
-                  textInputAction: TextInputAction.done,
-                ),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {
-                    if (formKey.currentState!.validate()) {
-                      // Проведите логику регистрации здесь
-                      print('Регистрация выполнена:');
-                      print('Имя: ${nameController.text}');
-                      print('Почта: ${emailController.text}');
-                      print('Пароль: ${passwordController.text}');
-
-                      // Вернуться на предыдущий экран
-                      Navigator.pop(context);
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF1E1E1E),
-                    minimumSize: const Size(200, 50),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                  ),
-                  child: const Text(
-                    'Вход',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontFamily: 'Roboto Mono',
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Login()),
-                    );
-                  },
-                  child: const Text(
-                    'Регистрация',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontFamily: 'Roboto Mono',
-                      fontWeight: FontWeight.w700,
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                    hintText: 'Пароль',
+                    hintStyle: TextStyle(
                       color: Colors.black,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  if (formKey.currentState!.validate()) {
+                    // Логика регистрации
+                    print('Регистрация выполнена:');
+                    print('Имя: ${nameController.text}');
+                    print('Почта: ${emailController.text}');
+                    print('Пароль: ${passwordController.text}');
+                    Navigator.pop(context);
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF1E1E1E),
+                  minimumSize: const Size(200, 50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                ),
+                child: const Text(
+                  'Вход',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontFamily: 'Roboto Mono',
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Login()),
+                  );
+                },
+                child: const Text(
+                  'Регистрация',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontFamily: 'Roboto Mono',
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

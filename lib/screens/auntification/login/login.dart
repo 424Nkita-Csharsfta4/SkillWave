@@ -1,28 +1,68 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:skillwave/course/screens/dashboard_screen.dart';
 import 'package:skillwave/screens/auntification/sign/sign.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:http/http.dart' as http;
 
+// ignore: must_be_immutable
 class Login extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  File? _image;
+
+  /// Firebase
+  final FirebaseAuth auth = FirebaseAuth.instance;
+
+  Future<void> signIn(email, password) async {
+    await auth.signInWithEmailAndPassword(email: email, password: password);
+  }
+
+  Stream<User?> get authStateChanges => auth.authStateChanges();
 
   Login({Key? key}) : super(key: key);
 
-  void _registerPressed(BuildContext context) {
-    String name = nameController.text;
-    String email = emailController.text;
-    String password = passwordController.text;
+  Future<void> _getImage() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
 
-    // Ваша логика регистрации здесь
-    print('Регистрация выполнена:');
-    print('Имя: $name');
-    print('Почта: $email');
-    print('Пароль: $password');
+    if (image != null) {
+      _image = File(image.path);
+    }
+  }
 
-    // Сброс полей после регистрации (если нужно)
-    nameController.clear();
-    emailController.clear();
-    passwordController.clear();
+  void _registerPressed(BuildContext context) async {
+    if (_image != null) {
+      File imageFile = File(_image!.path);
+
+      // // Convert the image file to base64 format
+      List<int> imageBytes = await imageFile.readAsBytes();
+      String base64Image = base64Encode(imageBytes);
+      try {
+        await http.post(
+          //AIzaSyC-AcRDGJ775rr7MaOiL2IgwtSZ0vh7_jA
+          Uri.parse(''),
+          body: {
+            'name': nameController.text,
+            'email': emailController.text,
+            'password': passwordController.text,
+            'image': base64Image,
+          },
+        );
+
+        // ignore: use_build_context_synchronously
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const DashboardScreen()),
+        );
+      } catch (e) {
+        // Handle error during registration
+        print(e);
+      }
+    }
   }
 
   @override
@@ -36,7 +76,7 @@ class Login extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Spacer(), // Добавлен Spacer для размещения "трех точек" внизу
+              const SizedBox(height: 20),
               const Text(
                 'SkillWeave',
                 style: TextStyle(
@@ -51,6 +91,7 @@ class Login extends StatelessWidget {
                 width: 291,
                 height: 269,
               ),
+              const SizedBox(height: 20),
               Container(
                 width: 282,
                 height: 40,
@@ -58,7 +99,7 @@ class Login extends StatelessWidget {
                   borderRadius: BorderRadius.circular(4),
                   color: Colors.white,
                 ),
-                child: TextFormField(
+                child: TextField(
                   controller: nameController,
                   decoration: const InputDecoration(
                     border: InputBorder.none,
@@ -80,7 +121,7 @@ class Login extends StatelessWidget {
                   borderRadius: BorderRadius.circular(4),
                   color: Colors.white,
                 ),
-                child: TextFormField(
+                child: TextField(
                   controller: emailController,
                   decoration: const InputDecoration(
                     border: InputBorder.none,
@@ -102,7 +143,7 @@ class Login extends StatelessWidget {
                   borderRadius: BorderRadius.circular(4),
                   color: Colors.white,
                 ),
-                child: TextFormField(
+                child: TextField(
                   controller: passwordController,
                   obscureText: true,
                   decoration: const InputDecoration(
@@ -114,6 +155,54 @@ class Login extends StatelessWidget {
                       fontSize: 15,
                       fontWeight: FontWeight.w700,
                     ),
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: () async {
+                  await _getImage();
+                  if (_image != null) {
+                    print('Фото выбрано: ${_image!.path}');
+                  }
+                },
+                child: Container(
+                  width: 282,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4),
+                    color: Colors.white,
+                  ),
+                  child: Stack(
+                    children: [
+                      Container(
+                        width: 67,
+                        height: 26,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(2),
+                          color: Colors.white,
+                        ),
+                      ),
+                      const Stack(
+                        children: [
+                          SizedBox(
+                            width: 20,
+                            height: 18.000001907348633,
+                          ),
+                          SizedBox(
+                            width: 8,
+                            height: 8.000000953674316,
+                          ),
+                        ],
+                      ),
+                      const Positioned(
+                        left: 8,
+                        top: 6,
+                        child: Icon(
+                          Icons.camera_alt,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -144,7 +233,6 @@ class Login extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              const Spacer(),
               TextButton(
                 onPressed: () {
                   Navigator.push(

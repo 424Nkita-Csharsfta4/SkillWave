@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "skillwave",
+			"path": "."
+		},
+		{
+			"name": "assets",
+			"path": "../../../Downloads/assets"
+		}
+	],
+	"settings": {}
+}
