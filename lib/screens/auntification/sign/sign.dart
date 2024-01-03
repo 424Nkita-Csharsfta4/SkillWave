@@ -9,9 +9,10 @@ class SignUp extends StatelessWidget {
   final TextEditingController confirmPasswordController =
       TextEditingController();
 
-  ///firebase
+  /// Firebase instance for user authentication
   final FirebaseAuth auth = FirebaseAuth.instance;
 
+  // Method to register user with email and password
   Future<void> register(email, password) async {
     await auth.createUserWithEmailAndPassword(email: email, password: password);
   }
@@ -49,11 +50,13 @@ class SignUp extends StatelessWidget {
                 height: 359,
               ),
               const SizedBox(height: 20),
+              // Input field for email
               Container(
                 width: 282,
                 height: 40,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4),
+                  borderRadius:
+                      BorderRadius.circular(4), // Adding border radius
                   color: Colors.white,
                 ),
                 child: TextField(
@@ -71,11 +74,13 @@ class SignUp extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
+              // Input field for password
               Container(
                 width: 282,
                 height: 40,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4),
+                  borderRadius:
+                      BorderRadius.circular(4), // Adding border radius
                   color: Colors.white,
                 ),
                 child: TextField(
@@ -97,7 +102,7 @@ class SignUp extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
-                    // Логика регистрации
+                    // Registration logic upon validation
                     print('Регистрация выполнена:');
                     print('Имя: ${nameController.text}');
                     print('Почта: ${emailController.text}');

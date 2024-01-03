@@ -46,6 +46,11 @@ dependencies:
   line_awesome_flutter: ^2.0.0
   get: ^4.6.6
   http: ^1.1.0
+  google_fonts: ^6.1.0
+  cloud_firestore: ^4.13.6
+  line_icons: ^2.0.3
+  go_router: ^13.0.0
+  dio: ^5.4.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

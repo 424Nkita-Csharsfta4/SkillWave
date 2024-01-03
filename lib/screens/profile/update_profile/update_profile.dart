@@ -1,134 +1,166 @@
 import 'package:flutter/material.dart';
-import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-import 'package:skillwave/screens/profile/update_profile/const/const.dart';
-import 'package:get/get.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class UpdateProfileScreen extends StatelessWidget {
+class UpdateProfileScreen extends StatefulWidget {
   const UpdateProfileScreen({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
+  _UpdateProfileScreenState createState() => _UpdateProfileScreenState();
+}
+
+class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final _fullNameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _phoneNoController = TextEditingController();
+  final _passwordController = TextEditingController();
+  bool _obscurePassword = true;
+
+  @override
+  void dispose() {
+    _fullNameController.dispose();
+    _emailController.dispose();
+    _phoneNoController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  void _togglePasswordVisibility() {
+    setState(() {
+      _obscurePassword = !_obscurePassword;
+    });
+  }
+
+  void _updateProfile() async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        User? user = FirebaseAuth.instance.currentUser;
+        if (user != null) {
+          await user.updateDisplayName(_fullNameController.text);
+          await user.updateEmail(_emailController.text);
+          await user.updatePhoneNumber(
+              _phoneNoController.text as PhoneAuthCredential);
+          await user.updatePassword(_passwordController.text);
+          // ignore: use_build_context_synchronously
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Профиль обновлен успешно')),
+          );
+        }
+      } catch (e) {
+        // ignore: use_build_context_synchronously
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Ошибка обновления профиля')),
+        );
+      }
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final controller = Get.put(ProfileController());
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-            onPressed: () => Get.back(),
-            icon: const Icon(LineAwesomeIcons.angle_left)),
-        title: Text(tEditProfile,
-            style: Theme.of(context).textTheme.headlineMedium),
+        title: const Text('Редактировать профиль'),
       ),
       body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(tDefaultSize),
+        padding: const EdgeInsets.all(16),
+        child: Form(
+          key: _formKey,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // -- IMAGE with ICON
-              Stack(
-                children: [
-                  SizedBox(
-                    width: 120,
-                    height: 120,
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.circular(100),
-                        child: const Image(image: AssetImage(tProfileImage))),
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: Container(
-                      width: 35,
-                      height: 35,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          color: tPrimaryColor),
-                      child: const Icon(LineAwesomeIcons.camera,
-                          color: Colors.black, size: 20),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 50),
-
-              // -- Form Fields
-              Form(
-                child: Column(
+              Center(
+                child: Stack(
                   children: [
-                    TextFormField(
-                      decoration: const InputDecoration(
-                          label: Text(tFullName),
-                          prefixIcon: Icon(LineAwesomeIcons.user)),
-                    ),
-                    const SizedBox(height: tFormHeight - 20),
-                    TextFormField(
-                      decoration: const InputDecoration(
-                          label: Text(tEmail),
-                          prefixIcon: Icon(LineAwesomeIcons.envelope_1)),
-                    ),
-                    const SizedBox(height: tFormHeight - 20),
-                    TextFormField(
-                      decoration: const InputDecoration(
-                          label: Text(tPhoneNo),
-                          prefixIcon: Icon(LineAwesomeIcons.phone)),
-                    ),
-                    const SizedBox(height: tFormHeight - 20),
-                    TextFormField(
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        label: const Text(tPassword),
-                        suffixIcon: IconButton(
-                            icon: const Icon(LineAwesomeIcons.eye_slash),
-                            onPressed: () {}),
+                    CircleAvatar(
+                      radius: 60,
+                      backgroundImage: NetworkImage(
+                        FirebaseAuth.instance.currentUser!.photoURL!,
                       ),
                     ),
-                    const SizedBox(height: tFormHeight),
-
-                    // -- Form Submit Button
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () =>
-                            Get.to(() => const UpdateProfileScreen()),
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: tPrimaryColor,
-                            side: BorderSide.none,
-                            shape: const StadiumBorder()),
-                        child: const Text(tEditProfile,
-                            style: TextStyle(color: tDarkColor)),
-                      ),
-                    ),
-                    const SizedBox(height: tFormHeight),
-
-                    // -- Created Date and Delete Button
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text.rich(
-                          TextSpan(
-                            text: tJoined,
-                            style: TextStyle(fontSize: 12),
-                            children: [
-                              TextSpan(
-                                  text: tJoinedAt,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12))
-                            ],
-                          ),
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: Container(
+                        width: 35,
+                        height: 35,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Color.fromARGB(255, 0, 0, 0),
                         ),
-                        ElevatedButton(
+                        child: IconButton(
                           onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor:
-                                  Colors.redAccent.withOpacity(0.1),
-                              elevation: 0,
-                              foregroundColor: Colors.red,
-                              shape: const StadiumBorder(),
-                              side: BorderSide.none),
-                          child: const Text(tDelete),
+                          icon: const Icon(Icons.camera_alt),
+                          color: Colors.white,
                         ),
-                      ],
-                    )
+                      ),
+                    ),
                   ],
+                ),
+              ),
+              const SizedBox(height: 32),
+              TextFormField(
+                controller: _fullNameController,
+                decoration: const InputDecoration(
+                  labelText: 'Полное имя',
+                  prefixIcon: Icon(Icons.person),
+                ),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Пожалуйста, введите ваше полное имя';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 16),
+              TextFormField(
+                controller: _emailController,
+                decoration: const InputDecoration(
+                  labelText: 'Электронная почта',
+                  prefixIcon: Icon(Icons.email),
+                ),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Пожалуйста, введите свой адрес электронной почты';
+                  }
+                  if (!value.contains('@')) {
+                    return 'Пожалуйста, введите действительный адрес электронной почты';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 16),
+              const SizedBox(height: 16),
+              TextFormField(
+                controller: _passwordController,
+                obscureText: _obscurePassword,
+                decoration: InputDecoration(
+                  labelText: 'Пароль',
+                  prefixIcon: const Icon(Icons.lock),
+                  suffixIcon: IconButton(
+                    onPressed: _togglePasswordVisibility,
+                    icon: Icon(
+                      _obscurePassword
+                          ? Icons.visibility_off
+                          : Icons.visibility,
+                    ),
+                  ),
+                ),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Пожалуйста, введите пароль';
+                  }
+                  if (value.length < 6) {
+                    return 'Пароль должен состоять не менее чем из 6 символов';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 32),
+              Center(
+                child: ElevatedButton(
+                  onPressed: _updateProfile,
+                  child: const Text('Сохранить изменения'),
                 ),
               ),
             ],

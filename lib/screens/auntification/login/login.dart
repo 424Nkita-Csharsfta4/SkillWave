@@ -17,14 +17,17 @@ class Login extends StatelessWidget {
   /// Firebase
   final FirebaseAuth auth = FirebaseAuth.instance;
 
+  /// Метод для входа пользователя
   Future<void> signIn(email, password) async {
     await auth.signInWithEmailAndPassword(email: email, password: password);
   }
 
+  /// Получение изменений в состоянии аутентификации
   Stream<User?> get authStateChanges => auth.authStateChanges();
 
   Login({Key? key}) : super(key: key);
 
+  /// Получение изображения из галереи
   Future<void> _getImage() async {
     final ImagePicker picker = ImagePicker();
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
@@ -34,16 +37,16 @@ class Login extends StatelessWidget {
     }
   }
 
+  /// Обработка нажатия кнопки регистрации
   void _registerPressed(BuildContext context) async {
     if (_image != null) {
       File imageFile = File(_image!.path);
 
-      // // Convert the image file to base64 format
+      // Конвертация изображения в формат base64
       List<int> imageBytes = await imageFile.readAsBytes();
       String base64Image = base64Encode(imageBytes);
       try {
         await http.post(
-          //AIzaSyC-AcRDGJ775rr7MaOiL2IgwtSZ0vh7_jA
           Uri.parse(''),
           body: {
             'name': nameController.text,
@@ -53,13 +56,14 @@ class Login extends StatelessWidget {
           },
         );
 
+        /// Переход на экран Dashboard после успешной регистрации
         // ignore: use_build_context_synchronously
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const DashboardScreen()),
         );
       } catch (e) {
-        // Handle error during registration
+        // Обработка ошибок при регистрации
         print(e);
       }
     }
@@ -92,6 +96,7 @@ class Login extends StatelessWidget {
                 height: 269,
               ),
               const SizedBox(height: 20),
+              // Поле для ввода имени
               Container(
                 width: 282,
                 height: 40,
@@ -114,6 +119,7 @@ class Login extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
+              // Поле для ввода почты
               Container(
                 width: 282,
                 height: 40,
@@ -136,11 +142,13 @@ class Login extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
+              // Поле для ввода пароля
               Container(
                 width: 282,
                 height: 40,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4),
+                  borderRadius:
+                      BorderRadius.circular(4), // Border radius for input
                   color: Colors.white,
                 ),
                 child: TextField(
@@ -169,7 +177,8 @@ class Login extends StatelessWidget {
                   width: 282,
                   height: 40,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4),
+                    borderRadius:
+                        BorderRadius.circular(4), // Border radius for input
                     color: Colors.white,
                   ),
                   child: Stack(
@@ -178,7 +187,8 @@ class Login extends StatelessWidget {
                         width: 67,
                         height: 26,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(2),
+                          borderRadius: BorderRadius.circular(
+                              2), // Border radius for input
                           color: Colors.white,
                         ),
                       ),
