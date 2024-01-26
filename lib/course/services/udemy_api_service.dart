@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:skillwave/course/model/course.dart';
 import 'package:skillwave/course/model/udemy_api.dart';

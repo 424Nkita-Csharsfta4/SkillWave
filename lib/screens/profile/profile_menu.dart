@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class ProfileMenuWidget extends StatelessWidget {
   const ProfileMenuWidget({
