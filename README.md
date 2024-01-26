@@ -47,6 +47,9 @@ https://github.com/424Nkita-Csharsfta4/SkillWave/assets/103760832/62998072-8d5f-
 
 
 
+![image](https://github.com/424Nkita-Csharsfta4/SkillWave/assets/103760832/f8784d93-8c49-4555-a200-e0f1bb39698d)
+
+![image](https://github.com/424Nkita-Csharsfta4/SkillWave/assets/103760832/dbc9d638-9598-4d04-8b33-5a2bf64d9685)
 
 _______________________________________
 
