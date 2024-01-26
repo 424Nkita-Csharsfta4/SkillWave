@@ -6,7 +6,7 @@ https://github.com/424Nkita-Csharsfta4/SkillWave/assets/103760832/c9ad518d-8782-
 
 <h1>SkillWeave - это обучающяя платформа с курсами, разработанная с использованием:</h1>
 <h3>Flutter/Dart (Frontend/Mobile)</h3> 
-<h3>Firebase (backend) и C# (backend)<h3>
+<h3>Supabase/Sql (backend)<h3>
 
 
            
