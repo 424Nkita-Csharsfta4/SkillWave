@@ -5,11 +5,14 @@ https://github.com/424Nkita-Csharsfta4/SkillWave/assets/103760832/c9ad518d-8782-
 
 
 <h1>SkillWeave - это обучающяя платформа с курсами, разработанная с использованием:</h1>
-<h3>Flutter/Dart (Frontend/Mobile)</h3> 
-<h3>Supabase/Sql (backend)<h3>
-
-
-           
+<h2>Стек технологиий при разработке</h2> 
+<div>
+<img style="width:70px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" />
+<img style="width:100px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original-wordmark.svg" />
+<img style="width:100px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original-wordmark.svg" />
+<img style="width:100px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original-wordmark.svg" />
+<img style="width:100px;" src="https://supabase.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsupabase-logo-wordmark--dark.b36ebb5f.png&w=128&q=75"/>                    
+</div>      
 _______________________________________
 <h2>Задача:<h2/>
 
