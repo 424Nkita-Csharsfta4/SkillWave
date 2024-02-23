@@ -7,14 +7,6 @@
         "lessons": 16,
         "tests": 14,
         "documentation": "https://example.com/flutter-docs"
-    },
-    {
-        "id": 2,
-        "imageUrl": "https://example.com/image2.jpg",
-        "name": "Web Development",
-        "description": "Complete guide to modern web development",
-        "lessons": 30,
-        "tests": 10,
-        "documentation": "https://example.com/web-dev-docs"
     }
+    
 ]

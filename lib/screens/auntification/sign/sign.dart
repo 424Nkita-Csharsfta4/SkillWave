@@ -1,152 +1,86 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:skillwave/screens/auntification/login/login.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:http/http.dart' as http;
+import 'package:skillwave/course/screens/dashboard_screen.dart';
 
 class SignUp extends StatelessWidget {
-  final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
-
-  /// Firebase instance for user authentication
-  final FirebaseAuth auth = FirebaseAuth.instance;
-
-  // Method to register user with email and password
-  Future<void> register(email, password) async {
-    await auth.createUserWithEmailAndPassword(email: email, password: password);
-  }
 
   SignUp({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  Future<void> loginUser(
+      String email, String password, BuildContext context) async {
+    final url = Uri.parse('https://xywozykuxyqkubprtzql.supabase.co');
+    final response = await http.post(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'email': email, 'password': password}),
+    );
 
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          width: double.infinity,
-          color: Colors.white,
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                'SkillWeave',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 36,
-                  fontFamily: 'Roboto Mono',
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              const SizedBox(height: 20),
-              Image.asset(
-                '../assets/image/logo_sign.png',
-                width: 256,
-                height: 359,
-              ),
-              const SizedBox(height: 20),
-              // Input field for email
-              Container(
-                width: 282,
-                height: 40,
-                decoration: BoxDecoration(
-                  borderRadius:
-                      BorderRadius.circular(4), // Adding border radius
-                  color: Colors.white,
-                ),
-                child: TextField(
-                  controller: emailController,
-                  decoration: const InputDecoration(
-                    border: InputBorder.none,
-                    contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                    hintText: 'Почта',
-                    hintStyle: TextStyle(
-                      color: Colors.black,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              // Input field for password
-              Container(
-                width: 282,
-                height: 40,
-                decoration: BoxDecoration(
-                  borderRadius:
-                      BorderRadius.circular(4), // Adding border radius
-                  color: Colors.white,
-                ),
-                child: TextField(
-                  controller: passwordController,
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                    border: InputBorder.none,
-                    contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                    hintText: 'Пароль',
-                    hintStyle: TextStyle(
-                      color: Colors.black,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  if (formKey.currentState!.validate()) {
-                    // Registration logic upon validation
-                    print('Регистрация выполнена:');
-                    print('Имя: ${nameController.text}');
-                    print('Почта: ${emailController.text}');
-                    print('Пароль: ${passwordController.text}');
-                    Navigator.pop(context);
-                  }
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF1E1E1E),
-                  minimumSize: const Size(200, 50),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                ),
-                child: const Text(
-                  'Вход',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontFamily: 'Roboto Mono',
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
+    if (response.statusCode == 200) {
+      // Если вход успешен, переходим на DashboardScreen
+      // ignore: use_build_context_synchronously
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const DashboardScreen()),
+      );
+    } else {
+      // Если вход не удался, показываем модальное окно с проблемой
+      // ignore: use_build_context_synchronously
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Ошибка при входе'),
+            content: const Text(
+                'Пожалуйста, проверьте свой email и пароль и попробуйте снова.'),
+            actions: <Widget>[
               TextButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Login()),
-                  );
+                  Navigator.of(context).pop();
                 },
-                child: const Text(
-                  'Регистрация',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontFamily: 'Roboto Mono',
-                    fontWeight: FontWeight.w700,
-                    color: Colors.black,
-                  ),
-                ),
+                child: const Text('OK'),
               ),
             ],
-          ),
+          );
+        },
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Вход'),
+      ),
+      backgroundColor: Colors.white,
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextField(
+              controller: emailController,
+              decoration: const InputDecoration(labelText: 'Email'),
+            ),
+            TextField(
+              controller: passwordController,
+              decoration: const InputDecoration(labelText: 'Password'),
+              obscureText: true,
+            ),
+            const SizedBox(height: 16.0),
+            ElevatedButton(
+              onPressed: () async {
+                String email = emailController.text.trim();
+                String password = passwordController.text.trim();
+
+                await loginUser(email, password, context);
+              },
+              child: const Text('Вход'),
+            ),
+          ],
         ),
       ),
     );

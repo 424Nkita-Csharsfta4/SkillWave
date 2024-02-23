@@ -82,8 +82,8 @@ class CustomCard extends StatelessWidget {
                   Container(
                     decoration: BoxDecoration(
                       color: course.isFree
-                          ? Colors.green
-                          : const Color.fromARGB(255, 243, 33, 33),
+                          ? const Color.fromARGB(193, 128, 249, 132)
+                          : const Color.fromARGB(121, 255, 88, 88),
                       borderRadius: BorderRadius.circular(6),
                     ),
                     padding: const EdgeInsets.symmetric(

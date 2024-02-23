@@ -37,6 +37,6 @@ class LocalStorageService {
   void saveSelectedCourse(Course selectedCourse) {
     // TODO: Сохранение выбранного курса в локальное хранилище
     // Это место для логики сохранения курса в локальное хранилище
-    print('Course saved: ${selectedCourse.name}');
+    print('Курсы сохранены: ${selectedCourse.name}');
   }
 }

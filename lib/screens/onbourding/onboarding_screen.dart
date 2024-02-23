@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:skillwave/screens/auntification/login/login.dart';
+import 'package:skillwave/screens/auntification/block/login_state_block.dart';
+import 'package:skillwave/screens/auntification/login/model/login_with_image.dart';
+import 'package:skillwave/screens/auntification/login/view/login.dart';
+import 'package:skillwave/screens/auntification/login/viewmodel/login_view_model.dart';
 
 class Onboarding extends StatefulWidget {
   const Onboarding({Key? key}) : super(key: key);
@@ -43,7 +46,7 @@ class _OnboardingState extends State<Onboarding> {
                 imageUrl: '../assets/image/First_Persons.png',
                 title: 'Добро пожаловать!',
                 subtitle:
-                    'Приветствуем тебя на платформе, где ты сможешь раскрыть свой потенциал через обучение. Наши курсы созданы для того, чтобы помочь тебе освоить новые навыки, расширить горизонты и достичь новых вершин.',
+                    'Приветствуем тебя на платформе, где ты сможешь раскрыть свой потенциал через обучение.',
               ),
               _buildPage(
                 imageUrl: '../assets/image/Two_Persons.png',
@@ -56,14 +59,18 @@ class _OnboardingState extends State<Onboarding> {
                 title: 'Погружение в обучение',
                 subtitle:
                     'Готов ли ты начать учиться? Вместе мы откроем новые горизонты и обретем новые навыки. Наши курсы разработаны для того, чтобы каждый шаг был увлекательным и образовательным.',
-                isLastPage:
-                    true, // Добавим флаг, чтобы понять, что это последний экран
+                isLastPage: true,
               ),
-              Login(),
+              Login(
+                viewModel: LoginViewModel(
+                  registrationStrategy: RegistrationWithImage(),
+                  registrationStateManager: RegistrationStateManager(),
+                ),
+              ),
             ],
           ),
           Positioned(
-            bottom: 30, // Перемещаем иконки вниз
+            bottom: 30,
             child: Visibility(
               visible:
                   currentPage != 3, // Проверяем, не последняя ли это страница
