@@ -2,6 +2,9 @@
 
 <h2>Node.js + SupaBase</h2>
 
+
+![image](https://github.com/424Nkita-Csharsfta4/SkillWave/assets/103760832/6464bd84-7dcb-482e-83db-a456c10e9329)
+
 skillwave_api
 │
 ├── src
@@ -53,4 +56,5 @@ skillwave_api
 ├── .gitignore
 ├── package.json
 └── README.md
+
 
