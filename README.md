@@ -1,6 +1,6 @@
 # skillwave
 
-![image](https://github.com/424Nkita-Csharsfta4/SkillWave/assets/103760832/b05e8396-dcb3-485c-b6ba-7f8c60dc1508)
+![image](https://github.com/424Nkita-Csharsfta4/SkillWave/assets/103760832/3b1c2b08-c0c5-4479-b5fa-36d830b2b300)
 
 
 A new Flutter project.
