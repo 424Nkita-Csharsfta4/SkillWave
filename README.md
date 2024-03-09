@@ -1,5 +1,5 @@
 
-# Skillwave
+# SkillWave
 
 <img style="width:350px;" src="https://github.com/424Nkita-Csharsfta4/SkillWave/assets/103760832/e1670d51-5fd5-463a-b19e-85168e0980c0"/>
 
