@@ -157,3 +157,54 @@ Skillwave - это мощный инструмент для тех, кто ст�
 </div>
 <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExb3p6NWxzNGM0MGVjc2Y4cThuMjlzd2pscGxiaXNseXkwOGswaDh0NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/anDhBXwgvIa7m/giphy.gif"/>
 
+```mermaid
+graph TD
+    lib --> bloc
+    lib --> course
+    lib --> screens
+    lib --> services
+    lib --> utils
+    lib --> json
+    lib --> router
+    bloc --> onboarding_events.dart
+    bloc --> onboarding_states.dart
+    bloc --> onboarding_bloc.dart
+    course --> local_storage
+    course --> model
+    course --> udemy_api.dart
+    screens --> course_detail_screen.dart
+    screens --> dashboard_screen.dart
+    services --> udemy_api_service.dart
+    utils --> error_handler.dart
+    utils --> widgets
+    json --> course.json
+    router --> router.dart
+    router --> screens
+    screens --> auntification
+    screens --> block
+    screens --> login
+    screens --> interface
+    screens --> model
+    screens --> view
+    screens --> viewmodel
+    screens --> sign
+    screens --> onbourding
+    screens --> profile
+    screens --> update_profile
+    screens --> theme
+    auntification --> login_state_block.dart
+    login --> registration_strategy.dart
+    login --> model
+    login --> view
+    login --> viewmodel
+    sign --> sign.dart
+    onbourding --> onboarding_screen.dart
+    onbourding --> onboarding_screen_1.dart
+    profile --> const
+    profile --> profile.dart
+    profile --> profile_menu.dart
+    update_profile --> update_profile.dart
+    theme --> theme_switch.dart
+    main.dart
+
+```
