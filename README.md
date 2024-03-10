@@ -4,23 +4,25 @@
 <img style="width:350px;" src="https://github.com/424Nkita-Csharsfta4/SkillWave/assets/103760832/e1670d51-5fd5-463a-b19e-85168e0980c0"/>
 
 <nav>
-    <ul>
-        <li><a style="text-decoration: none;  font-family: 'Poppins', sans-serif;" href="#description"><h2>Описание</h2></a></li>
-        <li><a style="text-decoration: none;  font-family: 'Poppins', sans-serif;" href="#technologies"><h2>Стек технологий</h2></a></li>
-        <li><a style="text-decoration: none;  font-family: 'Poppins', sans-serif;" href="#features"><h2>Функциональные возможности</h2></a></li>
-        <li><a style="text-decoration: none;  font-family: 'Poppins', sans-serif;" href="#functionality"><h2>Функционал</h2></a></li>
-        <li><a style="text-decoration: none;  font-family: 'Poppins', sans-serif;" href="#additional"><h2>Дополнительные возможности</h2></a></li>
-        <li><a style="text-decoration: none;  font-family: 'Poppins', sans-serif;" href="#community"><h2>Развитие сообщества</h2></a></li>
-        <li><a style="text-decoration: none;  font-family: 'Poppins', sans-serif;" href="#mentoring"><h2>Программа менторства</h2></a></li>
-        <li><a style="text-decoration: none;  font-family: 'Poppins', sans-serif;" href="#integration"><h2>Интеграция с индустрией</h2></a></li>
-        <li><a style="text-decoration: none;  font-family: 'Poppins', sans-serif;" href="#perspectives"><h2>Перспективы<</h2>/a></li>
-        <li><a style="text-decoration: none;  font-family: 'Poppins', sans-serif;" href="#ui-ux"><h2>UI/UX</h2></a></li>
-        <li><a style="text-decoration: none;  font-family: 'Poppins', sans-serif;" href="#bloc-cubit"><h2>Bloc/Cubit</h2></a></li>
-        <li><a style="text-decoration: none;  font-family: 'Poppins', sans-serif;" href="#supabase"><h2>SupaBase</h2></a></li>
-        <li><a style="text-decoration: none;  font-family: 'Poppins', sans-serif;" href="#visualization"><h2>Визуализация</h2></a></li>
-        <li><a style="text-decoration: none;  font-family: 'Poppins', sans-serif;" href="#conclusion"><h2>Заключение</h2></a></li>
+    <ul style="list-style-type: none; padding: 0;">
+        <li><a style="text-decoration: none; color: black; font-family: 'Poppins', sans-serif;" href="#description">Описание</a></li>
+        <li><a style="text-decoration: none; color: black; font-family: 'Poppins', sans-serif;" href="#technologies">Стек технологий</a></li>
+        <li><a style="text-decoration: none; color: black; font-family: 'Poppins', sans-serif;" href="#features">Функциональные возможности</a></li>
+        <li><a style="text-decoration: none; color: black; font-family: 'Poppins', sans-serif;" href="#functionality">Функционал</a></li>
+        <li><a style="text-decoration: none; color: black; font-family: 'Poppins', sans-serif;" href="#additional">Дополнительные возможности</a></li>
+        <li><a style="text-decoration: none; color: black; font-family: 'Poppins', sans-serif;" href="#community">Развитие сообщества</a></li>
+        <li><a style="text-decoration: none; color: black; font-family: 'Poppins', sans-serif;" href="#mentoring">Программа менторства</a></li>
+        <li><a style="text-decoration: none; color: black; font-family: 'Poppins', sans-serif;" href="#integration">Интеграция с индустрией</a></li>
+        <li><a style="text-decoration: none; color: black; font-family: 'Poppins', sans-serif;" href="#perspectives">Перспективы</a></li>
+        <li><a style="text-decoration: none; color: black; font-family: 'Poppins', sans-serif;" href="#ui-ux">UI/UX</a></li>
+        <li><a style="text-decoration: none; color: black; font-family: 'Poppins', sans-serif;" href="#bloc-cubit">Bloc/Cubit</a></li>
+        <li><a style="text-decoration: none; color: black; font-family: 'Poppins', sans-serif;" href="#supabase">SupaBase</a></li>
+        <li><a style="text-decoration: none; color: black; font-family: 'Poppins', sans-serif;" href="#visualization">Визуализация</a></li>
+        <li><a style="text-decoration: none; color: black; font-family: 'Poppins', sans-serif;" href="#conclusion">Заключение</a></li>
     </ul>
 </nav>
+
+
 
 
 
